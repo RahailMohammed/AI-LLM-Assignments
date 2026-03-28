@@ -1,0 +1,54 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/raw.csv
+      hash: md5
+      md5: b1e7bdf4f3e61792c0979a5697dc7145
+      size: 2515206
+    - path: src/prepare.py
+      hash: md5
+      md5: 1bce72a7da16ab0268baa2be5a889800
+      size: 394
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 8e04e1c028bf2284a727001a8ed23bf0.dir
+      size: 2454016
+      nfiles: 2
+  transform:
+    cmd: python src/transform.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 8e04e1c028bf2284a727001a8ed23bf0.dir
+      size: 2454016
+      nfiles: 2
+    - path: src/transform.py
+      hash: md5
+      md5: 485d71151a3e3eaf6dc398297bc727c1
+      size: 1084
+    outs:
+    - path: data/features
+      hash: md5
+      md5: 16dc6084397a71eea6c7eb7b320aef4d.dir
+      size: 7927456
+      nfiles: 4
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 16dc6084397a71eea6c7eb7b320aef4d.dir
+      size: 7927456
+      nfiles: 4
+    - path: src/train.py
+      hash: md5
+      md5: f7da6b15cf399bb2e2c6e655af6d368c
+      size: 382
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: ed8a62b58793f5941f5ae96d65e5bf67
+      size: 420161
