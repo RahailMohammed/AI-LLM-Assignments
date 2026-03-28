@@ -1,3 +1,0 @@
-data/*
-!data/*.dvc
-!data/raw.csv.dvc
