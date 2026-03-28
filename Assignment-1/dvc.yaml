@@ -1,0 +1,35 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+      - src/prepare.py
+      - data/raw.csv
+    outs:
+      - data/processed
+
+  transform:
+    cmd: python src/transform.py
+    deps:
+      - src/transform.py
+      - data/processed
+    outs:
+      - data/features
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/features
+    outs:
+      - models/model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.pkl
+      - data/features
+    metrics:
+      - reports/metrics.json
+    plots:
+    - reports/plot.png  
