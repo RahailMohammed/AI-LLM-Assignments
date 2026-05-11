@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: frontend-pod
+  labels:
+    app: frontend
+
+spec:
+  containers:
+  - name: frontend
+    image: rahailpasha/k8s-app:v1
+
+    ports:
+    - containerPort: 80
